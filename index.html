@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    table td,
+    table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #04aa6d;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    table tr:hover {
+      background-color: #ddd;
+    }
+
+    [id*="btn-sort-"] {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="sign-in-or-out-button" style="margin-left: 25px">
+    Sign In/Authorize
+  </button>
+  <div id="auth-status" style="display: inline; padding-left: 25px"></div>
+  <hr />
+
+  <select name="" id="selects"></select>
+
+  <button id="filter">Lọc</button>
+  <button onclick="resets()">Reset</button>
+
+  <p id="totalSalary"></p>
+  <p id="status">Status: Loading...</p>
+
+  <div id="auth-status" style="display: inline; padding-left: 25px"></div>
+  <hr />
+  <div>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Mentor</th>
+          <th>Student</th>
+          <!-- <th>Status</th> -->
+          <th>FaceBook</th>
+          <th>
+            Số Giờ Đã Dạy
+            <!-- <button type="button" id="btn-sort-1">Sort</button> -->
+            <button type="button" id="btn-sort-1">
+              <span><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="10px" height="10px"
+                  viewBox="0 0 401.998 401.998" style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                      c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                      c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                      c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                      c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span>
+            </button>
+          </th>
+          <th>
+            Số Giờ Đã Đóng Tiền
+            <button type="button" id="btn-sort-2"> <span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                  c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                  c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                  c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                  c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
+          <th>
+            Số Giờ Còn Lại <button type="button" id="btn-sort-3"><span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                  c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                  c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                  c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                  c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
+          <th>
+            Số Giờ Đã Thanh Toán
+            <button type="button" id="btn-sort-4"><span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                  c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                  c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                  c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                  c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
+          <th>
+            Số Giờ Cần Thanh Toán
+            <button type="button" id="btn-sort-5"><span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                  c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                  c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                  c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                  c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
+          <th>Ngày Dạy Cuối</th>
+          <th>Lương</th>
+          <th>Tổng Lương</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script>
+    // ========================================== Bắt đầu từ đây là sign-in google ============================================
+
+    var GoogleAuth;
+    var SCOPE = "https://www.googleapis.com/auth/spreadsheets";
+    var gettedToken = [];
+
+    function resets() {
+      window.location.reload();
+    }
+
+    function handleClientLoad() {
+      // Load the API's client and auth2 modules.
+      // Call the initClient function after the modules load.
+      gapi.load("client:auth2", initClient);
+    }
+
+    function getApi(url) {
+      var patt = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
+      var key = url.match(patt);
+      //link của thầy
+      var url_api =
+        "https://sheets.googleapis.com/v4/spreadsheets/" +
+        key[1] +
+        "/values/Trang%20tính1?alt=json&access_token=" +
+        gettedToken[0].$b.access_token;
+
+      //var url_api = "https://sheets.googleapis.com/v4/spreadsheets/"+key[1]+"/values/Sheet1?alt=json&access_token="+gettedToken[0].Zb.access_token;
+
+      return url_api;
+    }
+
+    function initClient() {
+      // In practice, your app can retrieve one or more discovery documents.
+      var discoveryUrl =
+        "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest";
+
+      // Initialize the gapi.client object, which app uses to make API requests.
+      // Get API key and client ID from API Console.
+      // 'scope' field specifies space-delimited list of access scopes.
+      gapi.client
+        .init({
+          // apiKey: "AIzaSyCGSvBIe5NQrLagRP-ZZ9Q1lA2e5efoZgQ",
+          // clientId:
+          //   "368429132862-0e7tcs4e412i5fl7p8n1u6r259pg7hka.apps.googleusercontent.com",
+          apiKey: "AIzaSyAkOofkfB6SnWkc-9Cd_hDW1liY-pa74G8",
+          clientId: "512677808993-fqbc14m6c6vu78dgggd2rtd1bfm1i003.apps.googleusercontent.com",
+          discoveryDocs: [discoveryUrl],
+          scope: SCOPE,
+        })
+        .then(function () {
+          GoogleAuth = gapi.auth2.getAuthInstance();
+
+          // Listen for sign-in state changes.
+          GoogleAuth.isSignedIn.listen(updateSigninStatus);
+
+          // Handle initial sign-in state. (Determine if user is already signed in.)
+          var user = GoogleAuth.currentUser.get();
+          setSigninStatus();
+
+          gettedToken.push(user);
+          // console.log(user.Zb.access_token);
+
+          // Call handleAuthClick function when user clicks on
+          //      "Sign In/Authorize" button.
+          $("#sign-in-or-out-button").click(function () {
+            handleAuthClick();
+          });
+          $("#revoke-access-button").click(function () {
+            revokeAccess();
+          });
+
+          //==================================================================================================================
+
+          //console.log(gettedToken[0].Zb.access_token);
+
+          //link của thầy
+          // var link_total_url =
+          //   "https://docs.google.com/spreadsheets/d/1sx2NMPFL7QLPeRMAJvysJj82c74ARS1qMrgSfwc3Xcg/edit#gid=0";
+
+          //link test
+          var link_total_url =
+            "https://docs.google.com/spreadsheets/d/1QPvX386QHPydkT86ADu6PQyXHe1rtuuypsPxgnDgMDM/edit#gid=0";
+
+          var link_total_url_api = getApi(link_total_url);
+          var select = document.getElementById("selects");
+
+          $.getJSON(link_total_url_api, function (data) {
+            let mentorArr = [];
+            let allTrackingUrl = [];
+            let mentorArrDup = [];
+            //lặp mảng url
+            var arrData = data.values;
+
+            //lặp từng mảng để lấy tên các mentor
+
+            for (var i = 1; i < arrData.length; i++) {
+              mentorArr.push(arrData[i][1]);
+            }
+            mentorArrDup = mentorArr.filter(function (item, index) {
+              return mentorArr.indexOf(item) === index;
+            });
+            mentorArrDup.sort();
+
+            //lấy từng mentor và đưa vào select option
+            for (var i = 0; i < mentorArrDup.length; i++) {
+              var opt = mentorArrDup[i];
+              var el = document.createElement("option");
+              el.textContent = opt;
+              el.value = opt;
+              select.appendChild(el);
+            }
+          }).done(() => listAll());
+
+          function listAll() {
+            let arrData;
+            let pushArr = [];
+            let allTrackingUrl = [];
+            setStatusLoading();
+
+            $.getJSON(link_total_url_api, function (data) {
+              arrData = data.values;
+
+              for (let i = 1; i < arrData.length; i++) {
+                pushArr.push(arrData[i]);
+              }
+              for (let i = 0; i < pushArr.length; i++) {
+                allTrackingUrl.push(pushArr[i][0]);
+              }
+            }).done(function () {
+              removeTableRows();
+              clearTimeouts();
+              callAPIOnInterval(5, allTrackingUrl, pushArr);
+            });
+          }
+
+          document.getElementById("filter").onclick = function () {
+            finter();
+          };
+
+          function finter() {
+            let pushArr = [];
+            let mentorArr = [];
+            let allTrackingUrl = [];
+            let mentorArrDup = [];
+            setStatusLoading();
+
+            //lây url từng file tracktring
+            $.getJSON(link_total_url_api, function (data) {
+              //lặp mảng url
+              //lặp từng mảng để lấy tên các mentor
+              var arrData = data.values;
+
+              for (var i = 1; i < arrData.length; i++) {
+                mentorArr.push(arrData[i][1]);
+              }
+              mentorArrDup = mentorArr.filter(function (item, index) {
+                return mentorArr.indexOf(item) === index;
+              });
+
+              //lấy từng mentor và đưa vào select option
+              for (var i = 0; i < mentorArrDup.length; i++) {
+                var opt = mentorArrDup[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+              }
+
+              arrData.map((val) => {
+                if (val[3] === "Đang Học" && val[1] == select.value) {
+                  //các mảng sau khi được lọc với đk "đang học"
+                  //push các mảng đã lọc vào mảng mới
+                  pushArr.push(val);
+                }
+              });
+
+              //lặp từng giá trị trong mảng mới và gen vào table
+              for (var i = 0; i < pushArr.length; i++) {
+                allTrackingUrl.push(pushArr[i][0]);
+              }
+            }).done(function () {
+              removeTableRows();
+              clearTimeouts();
+              callAPIOnInterval(5, allTrackingUrl, pushArr);
+            });
+          }
+        });
+    }
+
+    var timeouts = [];
+    var allTableRows = [];
+
+    function callAPIOnInterval(
+      initialChunk,
+      allTrackingUrl,
+      tableRows,
+      startPoint = 0
+    ) {
+      let deferreds = [];
+
+      for (
+        let i = startPoint; i <= initialChunk && i < allTrackingUrl.length; i++
+      ) {
+        if (i == initialChunk) {
+          timeouts.push(
+            setTimeout(
+              () =>
+                callAPIOnInterval(
+                  initialChunk + 3,
+                  allTrackingUrl,
+                  tableRows,
+                  i + 1
+                ),
+              4000
+            )
+          );
+        }
+        if (startPoint === 0) {
+          allTableRows = [];
+        }
+        let eachTrackingUrl = getApi(allTrackingUrl[i]);
+        deferreds.push(
+          $.getJSON(eachTrackingUrl, {}, function (data) {
+            let dates = [];
+            for (let i = 0; i < data.values.length; i++) {
+              var timestamp = Date.parse(data.values[i][2]);
+
+              if (isNaN(timestamp) == false) {
+                dates.push(data.values[i][2]);
+              }
+            }
+            tableRows[i]["i4"] = data.values[3][8];
+            tableRows[i]["h4"] = data.values[3][7];
+            tableRows[i]["e4"] = data.values[3][4];
+            tableRows[i]["last_teaching_day"] = dates[dates.length - 1];
+          })
+        );
+      }
+      $.when(...deferreds, startPoint).then(function () {
+        renderTable(startPoint, tableRows);
+
+        if (allTrackingUrl.length === allTrackingUrl.length) {
+          setStatusDone();
+          sortTable("theTimeLeft");
+        }
+      });
+    }
+
+    function renderTable(startPoint, tableRows) {
+      var tongluong = 0;
+      for (let i = startPoint; i < tableRows.length; i++) {
+        tableRows[i][4] = Number(tableRows[i][4]);
+        hoursPaid = tableRows[i][4];
+        var total_hour_learned = tableRows[i]["i4"];
+        total_hour_learned = total_hour_learned.replace(",", ".");
+        tableRows[i]["total_hour_learned"] = total_hour_learned;
+        var totalSalaryPerClass =
+          Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+        tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+        var theTimeLeft =
+          Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+        tableRows[i]["theTimeLeft"] = theTimeLeft;
+        var hoursToPay = Math.floor(
+          ((total_hour_learned - hoursPaid) * 1000) / 1000
+        );
+        tableRows[i]["hoursToPay"] = hoursToPay;
+        tongluong += totalSalaryPerClass;
+
+        allTableRows = allTableRows.concat(
+          tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+        );
+
+        renderTableRow(tableRows[i], i);
+      }
+
+      var totalSalary = document.getElementById("totalSalary");
+      totalSalary.innerHTML = "Tổng Lương : " + tongluong;
+    }
+
+    function renderTableRow(row, index) {
+      $("#table tbody").append(
+        "<tr><td><a>" +
+        index +
+        "</a></td><td>" +
+        row["e4"] +
+        "</td><td>" +
+        row[2] +
+        "</td><td>" +
+        row[5] +
+        "</td><td>" +
+        row["total_hour_learned"] +
+        "</td><td>" +
+        row["h4"] +
+        '</td><td class="timeleft">' +
+        row["theTimeLeft"] +
+        "</td><td>" +
+        row[4] +
+        "</td><td>" +
+        row["hoursToPay"] +
+        "</td><td>" +
+        row["last_teaching_day"] +
+        "</td><td>" +
+        row[6] +
+        "</td><td>" +
+        row["totalSalaryPerClass"] +
+        "</td></tr>"
+      );
+
+      var timelefts = $(".timeleft");
+
+      if (row["theTimeLeft"] <= 3) {
+        timelefts[i].style.color = "red";
+        timelefts[i].style.fontWeight = "bold";
+      }
+    }
+
+    function sortTable(column = "i4") {
+      allTableRows.sort(function (a, b) {
+        a = a[column];
+        b = b[column];
+
+        if (ascSortOrder) {
+          return a < b ? -1 : a > b ? 1 : 0;
+        }
+        return a > b ? -1 : a < b ? 1 : 0;
+      });
+
+      removeTableRows();
+      renderTable(0, allTableRows);
+    }
+
+    var ascSortOrder = true;
+    $("#btn-sort-1").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable("i4");
+    });
+
+    $("#btn-sort-2").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable("h4");
+    });
+
+    $("#btn-sort-3").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable("theTimeLeft");
+    });
+
+    $("#btn-sort-4").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable(4);
+    });
+
+    $("#btn-sort-5").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable("hoursToPay");
+    });
+
+    function clearTimeouts() {
+      for (var i = 0; i < timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+      }
+
+      timeouts = [];
+    }
+
+    function removeTableRows() {
+      $("#table tbody").empty();
+    }
+
+    function setStatusLoading() {
+      $("#status").html("Status: Loading...");
+    }
+
+    function setStatusDone() {
+      $("#status").html("Status: Done");
+    }
+
+    function handleAuthClick() {
+      if (GoogleAuth.isSignedIn.get()) {
+        // User is authorized and has clicked "Sign out" button.
+        GoogleAuth.signOut();
+      } else {
+        // User is not signed in. Start Google auth flow.
+        GoogleAuth.signIn();
+      }
+    }
+
+    function revokeAccess() {
+      GoogleAuth.disconnect();
+    }
+
+    function setSigninStatus() {
+      var user = GoogleAuth.currentUser.get();
+      var isAuthorized = user.hasGrantedScopes(SCOPE);
+      if (isAuthorized) {
+        $("#sign-in-or-out-button").html("Sign out");
+        $("#revoke-access-button").css("display", "inline-block");
+        $("#auth-status").html("Đăng nhập thành công");
+      } else {
+        $("#sign-in-or-out-button").html("Sign In/Authorize");
+        $("#revoke-access-button").css("display", "none");
+        $("#auth-status").html("Xin vui lòng đăng nhập");
+      }
+    }
+
+    function updateSigninStatus() {
+      setSigninStatus();
+    }
+    // ========================================== Kết thúc sign-in google ============================================
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+</body>
+
+</html>
