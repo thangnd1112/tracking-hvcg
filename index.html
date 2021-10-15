@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Tracking</title>
   <style>
     table {
       width: 100%;
@@ -39,6 +39,39 @@
       background: transparent;
       cursor: pointer;
     }
+
+    .loader {
+      border: 3px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 3px solid #3498db;
+      width: 20px;
+      height: 20px;
+      -webkit-animation: spin 2s linear infinite;
+      /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
   </style>
 </head>
 
@@ -52,10 +85,11 @@
   <select name="" id="selects"></select>
 
   <button id="filter">Lọc</button>
-  <button onclick="resets()">Reset</button>
+  <button onclick="resets()">Reload</button>
 
   <p id="totalSalary"></p>
-  <p id="status">Status: Loading...</p>
+  <p id="status">Chờ đăng nhập...</p>
+  <p id="query"></p>
 
   <div id="auth-status" style="display: inline; padding-left: 25px"></div>
   <hr />
@@ -63,7 +97,7 @@
     <table id="table">
       <thead>
         <tr>
-          <th>No.</th>
+          <!-- <th>No.</th> -->
           <th>Mentor</th>
           <th>Student</th>
           <!-- <th>Status</th> -->
@@ -478,7 +512,7 @@
                   tableRows,
                   i + 1
                 ),
-              4000
+              5000
             )
           );
         }
@@ -515,40 +549,51 @@
 
     function renderTable(startPoint, tableRows) {
       var tongluong = 0;
+      var statusOn = 0;
+
       for (let i = startPoint; i < tableRows.length; i++) {
-        tableRows[i][4] = Number(tableRows[i][4]);
-        hoursPaid = tableRows[i][4];
-        var total_hour_learned = tableRows[i]["i4"];
-        total_hour_learned = total_hour_learned.replace(",", ".");
-        tableRows[i]["total_hour_learned"] = total_hour_learned;
-        var totalSalaryPerClass =
-          Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
-        tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
-        var theTimeLeft =
-          Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
-        tableRows[i]["theTimeLeft"] = theTimeLeft;
-        var hoursToPay = Math.floor(
-          ((total_hour_learned - hoursPaid) * 1000) / 1000
-        );
-        tableRows[i]["hoursToPay"] = hoursToPay;
-        tongluong += totalSalaryPerClass;
+        if (tableRows[i][3] == "Đang Học") {
+          statusOn++;
+          tableRows[i][4] = Number(tableRows[i][4]);
+          hoursPaid = tableRows[i][4];
+          var total_hour_learned = tableRows[i]["i4"];
+          total_hour_learned = total_hour_learned.replace(",", ".");
+          tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var totalSalaryPerClass =
+            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+          var theTimeLeft =
+            Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+          tableRows[i]["theTimeLeft"] = theTimeLeft;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
+          tableRows[i]["hoursToPay"] = hoursToPay;
+          tongluong += totalSalaryPerClass;
 
-        allTableRows = allTableRows.concat(
-          tableRows.filter((item) => allTableRows.indexOf(item) < 0)
-        );
+          allTableRows = allTableRows.concat(
+            tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+          );
 
-        renderTableRow(tableRows[i], i);
+          renderTableRow(tableRows[i], i);
+          if (theTimeLeft <= 3) {
+            var timelefts = $(".timeleft");
+            timelefts[i].style.color = "red";
+            timelefts[i].style.fontWeight = "bold";
+          }
+        }
       }
 
       var totalSalary = document.getElementById("totalSalary");
-      totalSalary.innerHTML = "Tổng Lương : " + tongluong;
+      !isNaN(tongluong) ? totalSalary.innerHTML = "Tổng Lương : " + tongluong : totalSalary.innerHTML = "Tổng Lương : " + "Loading...";
+      setStatusDone(statusOn);
+
+      // totalSalary.innerHTML = "Tổng Lương : " + tongluong;
     }
 
     function renderTableRow(row, index) {
       $("#table tbody").append(
-        "<tr><td><a>" +
-        index +
-        "</a></td><td>" +
+        "<tr><td>" +
         row["e4"] +
         "</td><td>" +
         row[2] +
@@ -573,12 +618,12 @@
         "</td></tr>"
       );
 
-      var timelefts = $(".timeleft");
+      // var timelefts = $(".timeleft");
 
-      if (row["theTimeLeft"] <= 3) {
-        timelefts[i].style.color = "red";
-        timelefts[i].style.fontWeight = "bold";
-      }
+      // if (row["theTimeLeft"] <= 3) {
+      //   timelefts[i].style.color = "red";
+      //   timelefts[i].style.fontWeight = "bold";
+      // }
     }
 
     function sortTable(column = "i4") {
@@ -635,12 +680,18 @@
     }
 
     function setStatusLoading() {
-      $("#status").html("Status: Loading...");
+      $("#status").html(` 
+      <div>Đang tải dữ liệu...</div>
+      <div style="margin-top: 5px;"class="loader"></div>
+      `);
     }
 
-    function setStatusDone() {
-      $("#status").html("Status: Done");
+    function setStatusDone(statusOn) {
+      $("#status").html(`Truy vấn thành công ${statusOn} kết quả.`);
     }
+    // function setQueryDone(statusOn) {
+    //   $("#query").html(`Truy vấn thành công ${statusOn} kết quả.`);
+    // }
 
     function handleAuthClick() {
       if (GoogleAuth.isSignedIn.get()) {
