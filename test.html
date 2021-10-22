@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="-4vNYhVukFVoDKu3O6uYNd8yTW0F6Yxh2jW4-zj7AhQ" />
   <title>Tracking</title>
   <style>
     table {
@@ -319,14 +318,14 @@
     function getApi(url) {
       var patt = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
       var key = url.match(patt);
-      //link của thầy
+      // link của thầy
       var url_api =
         "https://sheets.googleapis.com/v4/spreadsheets/" +
         key[1] +
         "/values/Trang%20tính1?alt=json&access_token=" +
-        gettedToken[0].$b.access_token;
+        gettedToken[0].Zb.access_token;
 
-      //var url_api = "https://sheets.googleapis.com/v4/spreadsheets/"+key[1]+"/values/Sheet1?alt=json&access_token="+gettedToken[0].Zb.access_token;
+      // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
 
       return url_api;
     }
@@ -361,7 +360,7 @@
           setSigninStatus();
 
           gettedToken.push(user);
-          // console.log(user.Zb.access_token);
+          console.log(user.Zb.access_token);
 
           // Call handleAuthClick function when user clicks on
           //      "Sign In/Authorize" button.
