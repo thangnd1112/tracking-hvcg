@@ -509,13 +509,13 @@
       var patt = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
       var key = url.match(patt);
       // link của thầy
-      // var url_api =
-      //   "https://sheets.googleapis.com/v4/spreadsheets/" +
-      //   key[1] +
-      //   "/values/Trang%20tính1?alt=json&access_token=" +
-      //   gettedToken[0].Zb.access_token;
+      var url_api =
+        "https://sheets.googleapis.com/v4/spreadsheets/" +
+        key[1] +
+        "/values/Trang%20tính1?alt=json&access_token=" +
+        gettedToken[0].Zb.access_token;
 
-      var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
+      // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
 
       return url_api;
     }
