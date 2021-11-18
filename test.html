@@ -40,6 +40,10 @@
       cursor: pointer;
     }
 
+    [id*="filter"] {
+      cursor: pointer;
+    }
+
     .loader {
       border: 3px solid #f3f3f3;
       border-radius: 50%;
@@ -49,6 +53,10 @@
       -webkit-animation: spin 2s linear infinite;
       /* Safari */
       animation: spin 2s linear infinite;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     /* Safari */
@@ -81,9 +89,6 @@
   <div id="auth-status" style="display: inline; padding-left: 25px"></div>
   <hr />
 
-  <select name="" id="selects"></select>
-
-  <button id="filter">Lọc</button>
   <button onclick="resets()">Reload</button>
 
   <p id="totalSalary"></p>
@@ -97,8 +102,80 @@
       <thead>
         <tr>
           <!-- <th>No.</th> -->
-          <th>Mentor</th>
-          <th>Student</th>
+          <th>Mentor
+            <button type="button" id="btn-sort-by-mentor">
+              <span><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="10px" height="10px"
+                  viewBox="0 0 401.998 401.998" style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                      c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                      c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                      c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                      c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span>
+            </button>
+          </th>
+          <th>Student
+            <button type="button" id="btn-sort-by-student">
+              <span><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="10px" height="10px"
+                  viewBox="0 0 401.998 401.998" style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+                      c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+                      c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+                      c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+                      c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span>
+            </button>
+          </th>
           <!-- <th>Status</th> -->
           <th>FaceBook</th>
           <th>
@@ -287,9 +364,114 @@
                   <g></g>
                 </svg></span></button>
           </th>
-          <th>Ngày Dạy Cuối</th>
-          <th>Lương</th>
-          <th>Tổng Lương</th>
+          <th>Ngày Dạy Cuối
+            <button type="button" id="btn-sort-last-day"><span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+          c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+          c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+          c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+          c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
+          <th>Lương
+            <button type="button" id="btn-sort-salary"><span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+              c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+              c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+              c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+              c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
+          <th>Tổng Lương
+            <button type="button" id="btn-sort-total-salary"><span><svg version="1.1" id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="10px" height="10px" viewBox="0 0 401.998 401.998"
+                  style="enable-background: new 0 0 401.998 401.998" xml:space="preserve">
+                  <g>
+                    <g>
+                      <path fill="#fff"
+                        d="M73.092,164.452h255.813c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.427-7.898,5.427-12.847
+              c0-4.949-1.813-9.229-5.427-12.85L213.846,5.424C210.232,1.812,205.951,0,200.999,0s-9.233,1.812-12.85,5.424L60.242,133.331
+              c-3.617,3.617-5.424,7.901-5.424,12.85c0,4.948,1.807,9.231,5.424,12.847C63.863,162.645,68.144,164.452,73.092,164.452z">
+                      </path>
+                      <path fill="#fff"
+                        d="M328.905,237.549H73.092c-4.952,0-9.233,1.808-12.85,5.421c-3.617,3.617-5.424,7.898-5.424,12.847
+              c0,4.949,1.807,9.233,5.424,12.848L188.149,396.57c3.621,3.617,7.902,5.428,12.85,5.428s9.233-1.811,12.847-5.428l127.907-127.906
+              c3.613-3.614,5.427-7.898,5.427-12.848c0-4.948-1.813-9.229-5.427-12.847C338.139,239.353,333.854,237.549,328.905,237.549z">
+                      </path>
+                    </g>
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span></button>
+          </th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -323,13 +505,13 @@
         "https://sheets.googleapis.com/v4/spreadsheets/" +
         key[1] +
         "/values/Trang%20tính1?alt=json&access_token=" +
-        gettedToken[0].Zb.access_token;
+        gettedToken[0].wc.access_token;
 
       // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
-
       return url_api;
     }
 
+    var link_total_url_api;
     function initClient() {
       // In practice, your app can retrieve one or more discovery documents.
       var discoveryUrl =
@@ -360,7 +542,7 @@
           setSigninStatus();
 
           gettedToken.push(user);
-          console.log(user.Zb.access_token);
+          // console.log(gettedToken[0].wc.access_token);
 
           // Call handleAuthClick function when user clicks on
           //      "Sign In/Authorize" button.
@@ -373,7 +555,7 @@
 
           //==================================================================================================================
 
-          //console.log(gettedToken[0].Zb.access_token);
+          // console.log(gettedToken[0].Zb.access_token);
 
           //link của thầy
           // var link_total_url =
@@ -383,8 +565,7 @@
           var link_total_url =
             "https://docs.google.com/spreadsheets/d/1QPvX386QHPydkT86ADu6PQyXHe1rtuuypsPxgnDgMDM/edit#gid=0";
 
-          var link_total_url_api = getApi(link_total_url);
-          var select = document.getElementById("selects");
+          link_total_url_api = getApi(link_total_url);
 
           $.getJSON(link_total_url_api, function (data) {
             let mentorArr = [];
@@ -403,15 +584,7 @@
             });
             mentorArrDup.sort();
 
-            //lấy từng mentor và đưa vào select option
-            for (var i = 0; i < mentorArrDup.length; i++) {
-              var opt = mentorArrDup[i];
-              var el = document.createElement("option");
-              el.textContent = opt;
-              el.value = opt;
-              select.appendChild(el);
-            }
-          }).done(() => listAll());
+          }).done(() => window.filterOnNewTab ? filter() : listAll());
 
           function listAll() {
             let arrData;
@@ -433,59 +606,47 @@
               clearTimeouts();
               callAPIOnInterval(5, allTrackingUrl, pushArr);
             });
-          }
-
-          document.getElementById("filter").onclick = function () {
-            finter();
           };
+        });
+    }
 
-          function finter() {
-            let pushArr = [];
-            let mentorArr = [];
-            let allTrackingUrl = [];
-            let mentorArrDup = [];
-            setStatusLoading();
+    function filter() {
+      window.filterOnNewTab = false;
+      let pushArr = [];
+      let mentorArr = [];
+      let allTrackingUrl = [];
+      let mentorArrDup = [];
+      setStatusLoading();
 
-            //lây url từng file tracktring
-            $.getJSON(link_total_url_api, function (data) {
-              //lặp mảng url
-              //lặp từng mảng để lấy tên các mentor
-              var arrData = data.values;
+      //lây url từng file tracktring
+      $.getJSON(link_total_url_api, function (data) {
+        //lặp mảng url
+        //lặp từng mảng để lấy tên các mentor
+        var arrData = data.values;
+        for (var i = 1; i < arrData.length; i++) {
+          mentorArr.push(arrData[i][1]);
+        }
+        mentorArrDup = mentorArr.filter(function (item, index) {
+          return mentorArr.indexOf(item) === index;
+        });
 
-              for (var i = 1; i < arrData.length; i++) {
-                mentorArr.push(arrData[i][1]);
-              }
-              mentorArrDup = mentorArr.filter(function (item, index) {
-                return mentorArr.indexOf(item) === index;
-              });
-
-              //lấy từng mentor và đưa vào select option
-              for (var i = 0; i < mentorArrDup.length; i++) {
-                var opt = mentorArrDup[i];
-                var el = document.createElement("option");
-                el.textContent = opt;
-                el.value = opt;
-              }
-
-              arrData.map((val) => {
-                if (val[3] === "Đang Học" && val[1] == select.value) {
-                  //các mảng sau khi được lọc với đk "đang học"
-                  //push các mảng đã lọc vào mảng mới
-                  pushArr.push(val);
-                }
-              });
-
-              //lặp từng giá trị trong mảng mới và gen vào table
-              for (var i = 0; i < pushArr.length; i++) {
-                allTrackingUrl.push(pushArr[i][0]);
-              }
-            }).done(function () {
-              removeTableRows();
-              clearTimeouts();
-              callAPIOnInterval(5, allTrackingUrl, pushArr);
-            });
+        arrData.map((val) => {
+          if (val[3] === "Đang Học" && val[1] == filterBy[1]) {
+            //các mảng sau khi được lọc với đk "đang học"
+            //push các mảng đã lọc vào mảng mới
+            pushArr.push(val);
           }
         });
+
+        //lặp từng giá trị trong mảng mới và gen vào table
+        for (var i = 0; i < pushArr.length; i++) {
+          allTrackingUrl.push(pushArr[i][0]);
+        }
+      }).done(function () {
+        removeTableRows();
+        clearTimeouts();
+        callAPIOnInterval(5, allTrackingUrl, pushArr);
+      });
     }
 
     var timeouts = [];
@@ -534,6 +695,7 @@
             tableRows[i]["h4"] = data.values[3][7];
             tableRows[i]["e4"] = data.values[3][4];
             tableRows[i]["last_teaching_day"] = dates[dates.length - 1];
+            // console.log(tableRows[i][0]);
           })
         );
       }
@@ -576,29 +738,43 @@
           );
 
           renderTableRow(tableRows[i], i);
+
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, '_blank');
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+
           if (theTimeLeft <= 3) {
             var timelefts = $(".timeleft");
             timelefts[i].style.color = "red";
             timelefts[i].style.fontWeight = "bold";
           }
+          var linkFb = $(".linkFb");
+          if (linkFb[i].href == window.location.href) {
+            linkFb[i].style.display = "none";
+          }
         }
       }
 
       var totalSalary = document.getElementById("totalSalary");
-      !isNaN(tongluong) ? totalSalary.innerHTML = "Tổng Lương : " + tongluong : totalSalary.innerHTML = "Tổng Lương : " + "Loading...";
+      !isNaN(tongluong) && !window.filterOnNewTab ? totalSalary.innerHTML = "Tổng Lương : " + tongluong : totalSalary.innerHTML = "Tổng Lương : " + "Loading...";
       setStatusDone(statusOn);
 
       // totalSalary.innerHTML = "Tổng Lương : " + tongluong;
     }
-
     function renderTableRow(row, index) {
       $("#table tbody").append(
         "<tr><td>" +
-        row["e4"] +
+        `<span id="filter${index}">` + row["e4"] + "</span>" +
         "</td><td>" +
-        row[2] +
+        `<a href="${row[0]}" target="_blank">` + row[2] + "</a>" +
         "</td><td>" +
-        row[5] +
+        `<a class="linkFb" href="${row[5]}" target="_blank"><?xml version="1.0" encoding="UTF-8" standalone="no"?> <svg width="25" height="25" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="#3B5998"/>
+<path d="M26.5015 38.1115V25.0542H30.1059L30.5836 20.5546H26.5015L26.5077 18.3025C26.5077 17.1289 26.6192 16.5001 28.3048 16.5001H30.5581V12H26.9532C22.6231 12 21.0991 14.1828 21.0991 17.8536V20.5551H18.4V25.0547H21.0991V38.1115H26.5015Z" fill="white"/>
+</svg></a>` +
         "</td><td>" +
         row["total_hour_learned"] +
         "</td><td>" +
@@ -666,6 +842,26 @@
       ascSortOrder = !ascSortOrder;
       sortTable("hoursToPay");
     });
+    $("#btn-sort-by-student").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable(2);
+    });
+    $("#btn-sort-by-mentor").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable(1);
+    });
+    $("#btn-sort-last-day").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable("last_teaching_day");
+    });
+    $("#btn-sort-salary").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable(6);
+    });
+    $("#btn-sort-total-salary").click(function () {
+      ascSortOrder = !ascSortOrder;
+      sortTable("totalSalaryPerClass");
+    });
 
     function clearTimeouts() {
       for (var i = 0; i < timeouts.length; i++) {
@@ -702,7 +898,6 @@
         GoogleAuth.signIn();
       }
     }
-
     function revokeAccess() {
       GoogleAuth.disconnect();
     }
