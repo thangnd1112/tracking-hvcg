@@ -30,7 +30,7 @@ function getApi(url) {
     gettedToken[0].vc.access_token;
 
   // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
-  // console.log(gettedToken[0]);
+  console.log(gettedToken[0]);
   return url_api;
 }
 
