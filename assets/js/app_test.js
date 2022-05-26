@@ -19,9 +19,9 @@ function getApi(url) {
   var key = url.match(patt);
   console.log(gettedToken[0]);
   console.log(Object.keys(gettedToken[0])[1]);
+  console.log(gettedToken[0].Object.keys(gettedToken[0])[1]);
   // console.log(typeof theKeyOfAccessToken, theKeyOfAccessToken);
   // link của thầy
-  setTimeout(function() {
     var theKeyOfAccessToken = '';
     theKeyOfAccessToken = Object.keys(gettedToken[0])[1]
     if (typeof gettedToken[0].Object.keys(gettedToken[0])[1] == "undefined") {
@@ -35,10 +35,6 @@ function getApi(url) {
       "/values/Trang%20tính1?alt=json&access_token=" +
       gettedToken[0].Object.keys(gettedToken[0])[1].access_token;
     return url_api;
-
-  }, 2000);
-  
-
   // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
   // console.log(gettedToken[0]);
   // return url_api;
