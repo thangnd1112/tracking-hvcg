@@ -17,9 +17,10 @@ function handleClientLoad() {
 function getApi(url) {
   var patt = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
   var key = url.match(patt);
+  var theKeyOfAccessToken = '';
   console.log(gettedToken[0]);
-  console.log(Object.keys(gettedToken[0])[1])
-  let theKeyOfAccessToken = Object.keys(gettedToken[0])[1];
+  console.log(Object.keys(gettedToken[0])[1]);
+  theKeyOfAccessToken = Object.keys(gettedToken[0])[1]
   // link của thầy
   if (typeof gettedToken[0].theKeyOfAccessToken == "undefined") {
     $(".popup").show();
