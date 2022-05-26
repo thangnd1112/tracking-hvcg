@@ -17,8 +17,8 @@ function handleClientLoad() {
 function getApi(url) {
   var patt = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
   var key = url.match(patt);
-  console.log(gettedToken[0]);
-  console.log(Object.keys(gettedToken[0])[1]);
+  // console.log(gettedToken[0]);
+  // console.log(Object.keys(gettedToken[0])[1]);
   // console.log(gettedToken[0][Object.keys(gettedToken[0])[1]]);
   // console.log(typeof theKeyOfAccessToken, theKeyOfAccessToken);
   // link của thầy
