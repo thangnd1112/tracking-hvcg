@@ -24,7 +24,7 @@ function getApi(url) {
   setTimeout(function() {
     var theKeyOfAccessToken = '';
     theKeyOfAccessToken = Object.keys(gettedToken[0])[1]
-    if (typeof gettedToken[0].theKeyOfAccessToken == "undefined") {
+    if (typeof gettedToken[0].Object.keys(gettedToken[0])[1] == "undefined") {
       $(".popup").show();
       $(".popup p").html("Access token không hợp lệ!");
       $(".popup button").hide();
@@ -33,7 +33,7 @@ function getApi(url) {
       "https://sheets.googleapis.com/v4/spreadsheets/" +
       key[1] +
       "/values/Trang%20tính1?alt=json&access_token=" +
-      gettedToken[0].theKeyOfAccessToken.access_token;
+      gettedToken[0].Object.keys(gettedToken[0])[1].access_token;
     return url_api;
 
   }, 2000);
