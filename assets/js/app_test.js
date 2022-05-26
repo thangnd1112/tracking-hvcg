@@ -21,6 +21,7 @@ function getApi(url) {
   console.log(gettedToken[0]);
   console.log(Object.keys(gettedToken[0])[1]);
   theKeyOfAccessToken = Object.keys(gettedToken[0])[1]
+  console.log(theKeyOfAccessToken);
   // link của thầy
   if (typeof gettedToken[0].theKeyOfAccessToken == "undefined") {
     $(".popup").show();
