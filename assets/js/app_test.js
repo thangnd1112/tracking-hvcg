@@ -34,12 +34,14 @@ function getApi(url) {
       key[1] +
       "/values/Trang%20tính1?alt=json&access_token=" +
       gettedToken[0].theKeyOfAccessToken.access_token;
-  }, 200);
+    return url_api;
+
+  }, 1000);
   
 
   // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
   // console.log(gettedToken[0]);
-  return url_api;
+  // return url_api;
 }
 
 var link_total_url_api;
