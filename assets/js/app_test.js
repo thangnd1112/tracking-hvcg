@@ -19,7 +19,7 @@ function getApi(url) {
   var key = url.match(patt);
   console.log(gettedToken[0]);
   // link của thầy
-  if (typeof gettedToken[0].xc == "undefined") {
+  if (typeof gettedToken[0].zc == "undefined") {
     $(".popup").show();
     $(".popup p").html("Access token không hợp lệ!");
     $(".popup button").hide();
@@ -28,7 +28,7 @@ function getApi(url) {
     "https://sheets.googleapis.com/v4/spreadsheets/" +
     key[1] +
     "/values/Trang%20tính1?alt=json&access_token=" +
-    gettedToken[0].xc.access_token;
+    gettedToken[0].zc.access_token;
 
   // var url_api = "https://sheets.googleapis.com/v4/spreadsheets/" + key[1] + "/values/Sheet1?alt=json&access_token=" + gettedToken[0].Zb.access_token;
   // console.log(gettedToken[0]);
