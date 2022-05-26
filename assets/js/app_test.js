@@ -19,7 +19,7 @@ function getApi(url) {
   var key = url.match(patt);
   console.log(gettedToken[0]);
   console.log(Object.keys(gettedToken[0])[1]);
-  console.log(typeof theKeyOfAccessToken, theKeyOfAccessToken);
+  // console.log(typeof theKeyOfAccessToken, theKeyOfAccessToken);
   // link của thầy
   setTimeout(function() {
     var theKeyOfAccessToken = '';
