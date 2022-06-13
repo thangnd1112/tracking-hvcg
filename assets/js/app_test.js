@@ -48,13 +48,13 @@ function initClient() {
   // 'scope' field specifies space-delimited list of access scopes.
   gapi.client
     .init({
-      apiKey: "AIzaSyA-5v9hrBZt8gYxKqet-Of90cCPNLHGAnk",
-      clientId:
-        "385356524753-f4bficgqsm0sb1ggfma7trp6bimp1bo8.apps.googleusercontent.com",
-      // for test
-      // apiKey: "AIzaSyAkOofkfB6SnWkc-9Cd_hDW1liY-pa74G8",
+      // apiKey: "AIzaSyA-5v9hrBZt8gYxKqet-Of90cCPNLHGAnk",
       // clientId:
-      //   "512677808993-fqbc14m6c6vu78dgggd2rtd1bfm1i003.apps.googleusercontent.com",
+      //   "385356524753-f4bficgqsm0sb1ggfma7trp6bimp1bo8.apps.googleusercontent.com",
+      // for test
+      apiKey: "AIzaSyAkOofkfB6SnWkc-9Cd_hDW1liY-pa74G8",
+      clientId:
+        "512677808993-fqbc14m6c6vu78dgggd2rtd1bfm1i003.apps.googleusercontent.com",
       discoveryDocs: [discoveryUrl],
       scope: SCOPE,
     })
@@ -85,12 +85,12 @@ function initClient() {
       //console.log(gettedToken[0].Zb.access_token);
 
       // link của thầy
-      var link_total_url =
-        "https://docs.google.com/spreadsheets/d/1sx2NMPFL7QLPeRMAJvysJj82c74ARS1qMrgSfwc3Xcg/edit#gid=0";
-
-      // // link test
       // var link_total_url =
-      //   "https://docs.google.com/spreadsheets/d/1QPvX386QHPydkT86ADu6PQyXHe1rtuuypsPxgnDgMDM/edit#gid=0";
+      //   "https://docs.google.com/spreadsheets/d/1sx2NMPFL7QLPeRMAJvysJj82c74ARS1qMrgSfwc3Xcg/edit#gid=0";
+
+      // link test
+      var link_total_url =
+        "https://docs.google.com/spreadsheets/d/1QPvX386QHPydkT86ADu6PQyXHe1rtuuypsPxgnDgMDM/edit#gid=0";
 
       link_total_url_api = getApi(link_total_url);
 
