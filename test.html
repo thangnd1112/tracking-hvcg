@@ -11,24 +11,40 @@
 </head>
 
 <body>
-  <button onclick="resets()">Reload</button>
-  <button id="sign-in-or-out-button" style="margin-left: 25px">
-    Sign In/Authorize
-  </button>
-  <div id="auth-status" style="display: inline; padding-left: 25px"></div>
-  <hr />
-
-
-
-  <p id="status">Chờ đăng nhập...</p>
-  <p id="query"></p>
-  <p id="totalSalary"></p>
-
-  <div class="progress-bar">
-    <div class="progress-bar-label"></div>
+  <div class="d-flex">
+    <div class="left">
+      <button onclick="resets()">Reload</button>
+      <button id="sign-in-or-out-button" style="margin-left: 25px">
+        Sign In/Authorize
+      </button>
+      <div id="auth-status" style="display: inline; padding-left: 25px"></div>
+      <hr />
+    
+    
+    
+      <p id="status">Chờ đăng nhập...</p>
+      <p id="query"></p>
+      <p id="totalSalary"></p>
+    
+      <div class="progress-bar">
+        <div class="progress-bar-label"></div>
+      </div>
+    
+      <div id="auth-status" style="display: inline; padding-left: 25px"></div>
+    </div>
+  
+    <div class="right">
+      <!-- <label for="ltk">LTK</label>
+      <input type="radio" name="classType" id="ltk">
+      <label for="hvcg">HVCG</label>
+      <input type="radio" name="classType" id="hvcg"> -->
+      <select name="classType" id="classType">
+        <option value="0">All</option>
+        <option value="1">Lap trinh KID</option>
+        <option value="2">HVCG</option>
+      </select>
+    </div>
   </div>
-
-  <div id="auth-status" style="display: inline; padding-left: 25px"></div>
 
   <div>
     <table id="table">

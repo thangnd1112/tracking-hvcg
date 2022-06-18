@@ -136,6 +136,23 @@ function initClient() {
     });
 }
 
+// select class type
+// localStorage.setItem("classType", 0);
+// console.log(localStorage.getItem("classType"));
+// let classType = 0;
+$("#classType").on('change', function() {
+  localStorage.setItem("classType", this.value);
+  window.location.reload();
+  console.log(localStorage.getItem("classType"));
+  // if (classType == 1) {
+  //   window.location.href = "/tracking-hvcg/test-kid.html";
+  // } else if (classType == 2) {
+  //   window.location.href = "/tracking-hvcg/test-hvcg.html";
+  // } else {
+  //   window.location.href = "/tracking-hvcg/test.html";
+  // }
+});
+
 function filter() {
   window.filterOnNewTab = false;
   let pushArr = [];
@@ -251,66 +268,396 @@ function callAPIOnInterval(
     }
   });
 }
-
-function renderTable(startPoint, tableRows) {
+function renderKidClass(startPoint,tableRows) {
   var tongluong = 0;
   var statusOn = 0;
   for (let i = startPoint; i < tableRows.length; i++) {
-    if (tableRows[i][3] == "Đang Học") {
-      statusOn++;
-      tableRows[i][4] = Number(tableRows[i][4]);
-      hoursPaid = tableRows[i][4];
-      var total_hour_learned = tableRows[i]["i4"];
-      if (typeof total_hour_learned != "undefined") {
-        total_hour_learned = total_hour_learned.replace(",", ".");
-      }
-
-      tableRows[i]["total_hour_learned"] = total_hour_learned;
-      var totalSalaryPerClass =
-        Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
-      tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
-      var theTimeLeft =
-        Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
-      tableRows[i]["theTimeLeft"] = theTimeLeft;
-      var hoursToPay = Math.floor(
-        ((total_hour_learned - hoursPaid) * 1000) / 1000
-      );
-      tableRows[i]["hoursToPay"] = hoursToPay;
-      tongluong += totalSalaryPerClass;
-
-      allTableRows = allTableRows.concat(
-        tableRows.filter((item) => allTableRows.indexOf(item) < 0)
-      );
-
-      renderTableRow(tableRows[i], i);
-      if (typeof total_hour_learned != "undefined") {
-        document.getElementById("filter" + i).onclick = function () {
-          var w = window.open(window.location.href, "_blank");
-          w.filterOnNewTab = true;
-          w.filterBy = tableRows[i];
-          w.focus();
-        };
-        document.getElementById("filter" + i).onclick = function () {
-          var w = window.open(window.location.href, "_blank");
-          w.filterOnNewTab = true;
-          w.filterBy = tableRows[i];
-          w.focus();
-        };
+    if (tableRows[i][3] == "Đang Học") {  
+      if (tableRows[i][7] == "LTK" && localStorage.getItem("classType") == 1) {
+        statusOn++;
+        tableRows[i][4] = Number(tableRows[i][4]);
+        hoursPaid = tableRows[i][4];
+        var total_hour_learned = tableRows[i]["i4"];
+        if (typeof total_hour_learned != "undefined") {
+          total_hour_learned = total_hour_learned.replace(",", ".");
+        }
+  
+        tableRows[i]["total_hour_learned"] = total_hour_learned;
+        var totalSalaryPerClass =
+          Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+        tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+        var theTimeLeft =
+          Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+        tableRows[i]["theTimeLeft"] = theTimeLeft;
+        var hoursToPay = Math.floor(
+          ((total_hour_learned - hoursPaid) * 1000) / 1000
+        );
+        tableRows[i]["hoursToPay"] = hoursToPay;
+        tongluong += totalSalaryPerClass;
+  
+        allTableRows = allTableRows.concat(
+          tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+        );
+  
+        renderTableRow(tableRows[i], i);
+        if (typeof total_hour_learned != "undefined") {
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+        }
+      } else if (tableRows[i][7] == "HVCG" && localStorage.getItem("classType") == 2) {
+        statusOn++;
+        tableRows[i][4] = Number(tableRows[i][4]);
+        hoursPaid = tableRows[i][4];
+        var total_hour_learned = tableRows[i]["i4"];
+        if (typeof total_hour_learned != "undefined") {
+          total_hour_learned = total_hour_learned.replace(",", ".");
+        }
+  
+        tableRows[i]["total_hour_learned"] = total_hour_learned;
+        var totalSalaryPerClass =
+          Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+        tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+        var theTimeLeft =
+          Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+        tableRows[i]["theTimeLeft"] = theTimeLeft;
+        var hoursToPay = Math.floor(
+          ((total_hour_learned - hoursPaid) * 1000) / 1000
+        );
+        tableRows[i]["hoursToPay"] = hoursToPay;
+        tongluong += totalSalaryPerClass;
+  
+        allTableRows = allTableRows.concat(
+          tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+        );
+  
+        renderTableRow(tableRows[i], i);
+        if (typeof total_hour_learned != "undefined") {
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+        }
+      } else {
+        statusOn++;
+        tableRows[i][4] = Number(tableRows[i][4]);
+        hoursPaid = tableRows[i][4];
+        var total_hour_learned = tableRows[i]["i4"];
+        if (typeof total_hour_learned != "undefined") {
+          total_hour_learned = total_hour_learned.replace(",", ".");
+        }
+  
+        tableRows[i]["total_hour_learned"] = total_hour_learned;
+        var totalSalaryPerClass =
+          Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+        tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+        var theTimeLeft =
+          Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+        tableRows[i]["theTimeLeft"] = theTimeLeft;
+        var hoursToPay = Math.floor(
+          ((total_hour_learned - hoursPaid) * 1000) / 1000
+        );
+        tableRows[i]["hoursToPay"] = hoursToPay;
+        tongluong += totalSalaryPerClass;
+  
+        allTableRows = allTableRows.concat(
+          tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+        );
+  
+        renderTableRow(tableRows[i], i);
+        if (typeof total_hour_learned != "undefined") {
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+        }
       }
     }
+    }
+    var totalSalary = document.getElementById("totalSalary");
+    if (!isNaN(tongluong) && !window.filterOnNewTab) {
+      totalSalary.innerHTML = "Tổng Lương : " + tongluong;
+      setStatusDone(statusOn);
+    } else {
+      totalSalary.innerHTML = "";
+    }
+}
+function renderHvcgClass(startPoint,tableRows) {
+  var tongluong = 0;
+  var statusOn = 0;
+  for (let i = startPoint; i < tableRows.length; i++) {
+    if (tableRows[i][3] == "Đang Học" && tableRows[i][7] == "HVCG") {  
+        statusOn++;
+        tableRows[i][4] = Number(tableRows[i][4]);
+        hoursPaid = tableRows[i][4];
+        var total_hour_learned = tableRows[i]["i4"];
+        if (typeof total_hour_learned != "undefined") {
+          total_hour_learned = total_hour_learned.replace(",", ".");
+        }
+  
+        tableRows[i]["total_hour_learned"] = total_hour_learned;
+        var totalSalaryPerClass =
+          Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+        tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+        var theTimeLeft =
+          Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+        tableRows[i]["theTimeLeft"] = theTimeLeft;
+        var hoursToPay = Math.floor(
+          ((total_hour_learned - hoursPaid) * 1000) / 1000
+        );
+        tableRows[i]["hoursToPay"] = hoursToPay;
+        tongluong += totalSalaryPerClass;
+  
+        allTableRows = allTableRows.concat(
+          tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+        );
+  
+        renderTableRow(tableRows[i], i);
+        if (typeof total_hour_learned != "undefined") {
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+          document.getElementById("filter" + i).onclick = function () {
+            var w = window.open(window.location.href, "_blank");
+            w.filterOnNewTab = true;
+            w.filterBy = tableRows[i];
+            w.focus();
+          };
+        }
+      }
+    }
+    var totalSalary = document.getElementById("totalSalary");
+    if (!isNaN(tongluong) && !window.filterOnNewTab) {
+      totalSalary.innerHTML = "Tổng Lương : " + tongluong;
+      setStatusDone(statusOn);
+    } else {
+      totalSalary.innerHTML = "";
+    }
+}
+function renderAllClass(startPoint,tableRows) {
+  var tongluong = 0;
+  var statusOn = 0;
+  if (localStorage.getItem("classType") == 0) {
+    $('#classType option[value=0]').attr('selected','selected');
+    for (let i = startPoint; i < tableRows.length; i++) {
+      if (tableRows[i][3] == "Đang Học") {  
+          statusOn++;
+          tableRows[i][4] = Number(tableRows[i][4]);
+          hoursPaid = tableRows[i][4];
+          var total_hour_learned = tableRows[i]["i4"];
+          if (typeof total_hour_learned != "undefined") {
+            total_hour_learned = total_hour_learned.replace(",", ".");
+          }
+    
+          tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var totalSalaryPerClass =
+            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+          var theTimeLeft =
+            Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+          tableRows[i]["theTimeLeft"] = theTimeLeft;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
+          tableRows[i]["hoursToPay"] = hoursToPay;
+          tongluong += totalSalaryPerClass;
+    
+          allTableRows = allTableRows.concat(
+            tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+          );
+    
+          renderTableRow(tableRows[i], i);
+          if (typeof total_hour_learned != "undefined") {
+            document.getElementById("filter" + i).onclick = function () {
+              var w = window.open(window.location.href, "_blank");
+              w.filterOnNewTab = true;
+              w.filterBy = tableRows[i];
+              w.focus();
+            };
+            document.getElementById("filter" + i).onclick = function () {
+              var w = window.open(window.location.href, "_blank");
+              w.filterOnNewTab = true;
+              w.filterBy = tableRows[i];
+              w.focus();
+            };
+          }
+        }
+      }
+  } else if (localStorage.getItem("classType") == 1) {
+    $('#classType option[value=1]').attr('selected','selected');
+    for (let i = startPoint; i < tableRows.length; i++) {
+      if (tableRows[i][3] == "Đang Học" && tableRows[i][7] == "LTK") {  
+          statusOn++;
+          tableRows[i][4] = Number(tableRows[i][4]);
+          hoursPaid = tableRows[i][4];
+          var total_hour_learned = tableRows[i]["i4"];
+          if (typeof total_hour_learned != "undefined") {
+            total_hour_learned = total_hour_learned.replace(",", ".");
+          }
+    
+          tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var totalSalaryPerClass =
+            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+          var theTimeLeft =
+            Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+          tableRows[i]["theTimeLeft"] = theTimeLeft;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
+          tableRows[i]["hoursToPay"] = hoursToPay;
+          tongluong += totalSalaryPerClass;
+    
+          allTableRows = allTableRows.concat(
+            tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+          );
+    
+          renderTableRow(tableRows[i], i);
+          if (typeof total_hour_learned != "undefined") {
+            document.getElementById("filter" + i).onclick = function () {
+              var w = window.open(window.location.href, "_blank");
+              w.filterOnNewTab = true;
+              w.filterBy = tableRows[i];
+              w.focus();
+            };
+            document.getElementById("filter" + i).onclick = function () {
+              var w = window.open(window.location.href, "_blank");
+              w.filterOnNewTab = true;
+              w.filterBy = tableRows[i];
+              w.focus();
+            };
+          }
+        }
+      }
+  } else if (localStorage.getItem("classType") == 2)  {
+    $('#classType option[value=2]').attr('selected','selected');
+    for (let i = startPoint; i < tableRows.length; i++) {
+      if (tableRows[i][3] == "Đang Học" && tableRows[i][7] == "HVCG") {  
+          statusOn++;
+          tableRows[i][4] = Number(tableRows[i][4]);
+          hoursPaid = tableRows[i][4];
+          var total_hour_learned = tableRows[i]["i4"];
+          if (typeof total_hour_learned != "undefined") {
+            total_hour_learned = total_hour_learned.replace(",", ".");
+          }
+    
+          tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var totalSalaryPerClass =
+            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+          var theTimeLeft =
+            Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+          tableRows[i]["theTimeLeft"] = theTimeLeft;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
+          tableRows[i]["hoursToPay"] = hoursToPay;
+          tongluong += totalSalaryPerClass;
+    
+          allTableRows = allTableRows.concat(
+            tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+          );
+    
+          renderTableRow(tableRows[i], i);
+          if (typeof total_hour_learned != "undefined") {
+            document.getElementById("filter" + i).onclick = function () {
+              var w = window.open(window.location.href, "_blank");
+              w.filterOnNewTab = true;
+              w.filterBy = tableRows[i];
+              w.focus();
+            };
+            document.getElementById("filter" + i).onclick = function () {
+              var w = window.open(window.location.href, "_blank");
+              w.filterOnNewTab = true;
+              w.filterBy = tableRows[i];
+              w.focus();
+            };
+          }
+        }
+      }
   }
 
-  var totalSalary = document.getElementById("totalSalary");
-  if (!isNaN(tongluong) && !window.filterOnNewTab) {
-    totalSalary.innerHTML = "Tổng Lương : " + tongluong;
-    setStatusDone(statusOn);
-  } else {
-    totalSalary.innerHTML = "";
-  }
-  // !isNaN(tongluong) && !window.filterOnNewTab ? totalSalary.innerHTML = "Tổng Lương : " + tongluong : totalSalary.innerHTML = "Tổng Lương : " + "Loading...";
-  // setStatusDone(statusOn);
 
-  // totalSalary.innerHTML = "Tổng Lương : " + tongluong;
+
+    var totalSalary = document.getElementById("totalSalary");
+    if (!isNaN(tongluong) && !window.filterOnNewTab) {
+      totalSalary.innerHTML = "Tổng Lương : " + tongluong;
+      setStatusDone(statusOn);
+    } else {
+      totalSalary.innerHTML = "";
+    }
+}
+function renderTable(startPoint, tableRows) {
+       renderAllClass(startPoint,tableRows)
+        // statusOn++;
+        // tableRows[i][4] = Number(tableRows[i][4]);
+        // hoursPaid = tableRows[i][4];
+        // var total_hour_learned = tableRows[i]["i4"];
+        // if (typeof total_hour_learned != "undefined") {
+        //   total_hour_learned = total_hour_learned.replace(",", ".");
+        // }
+  
+        // tableRows[i]["total_hour_learned"] = total_hour_learned;
+        // var totalSalaryPerClass =
+        //   Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+        // tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
+        // var theTimeLeft =
+        //   Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
+        // tableRows[i]["theTimeLeft"] = theTimeLeft;
+        // var hoursToPay = Math.floor(
+        //   ((total_hour_learned - hoursPaid) * 1000) / 1000
+        // );
+        // tableRows[i]["hoursToPay"] = hoursToPay;
+        // tongluong += totalSalaryPerClass;
+  
+        // allTableRows = allTableRows.concat(
+        //   tableRows.filter((item) => allTableRows.indexOf(item) < 0)
+        // );
+  
+        // renderTableRow(tableRows[i], i);
+        // if (typeof total_hour_learned != "undefined") {
+        //   document.getElementById("filter" + i).onclick = function () {
+        //     var w = window.open(window.location.href, "_blank");
+        //     w.filterOnNewTab = true;
+        //     w.filterBy = tableRows[i];
+        //     w.focus();
+        //   };
+        //   document.getElementById("filter" + i).onclick = function () {
+        //     var w = window.open(window.location.href, "_blank");
+        //     w.filterOnNewTab = true;
+        //     w.filterBy = tableRows[i];
+        //     w.focus();
+        //   };
+        // }
+ 
 }
 function renderTableRow(row, index) {
   if (typeof row["e4"] != "undefined") {

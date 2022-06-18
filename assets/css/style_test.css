@@ -1,3 +1,13 @@
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+#classType {
+    outline: none;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
