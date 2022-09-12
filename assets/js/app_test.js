@@ -48,13 +48,13 @@ function initClient() {
   // 'scope' field specifies space-delimited list of access scopes.
   gapi.client
     .init({
-      apiKey: "AIzaSyA-5v9hrBZt8gYxKqet-Of90cCPNLHGAnk",
-      clientId:
-        "385356524753-f4bficgqsm0sb1ggfma7trp6bimp1bo8.apps.googleusercontent.com",
-      // for test
-      // apiKey: "AIzaSyAkOofkfB6SnWkc-9Cd_hDW1liY-pa74G8",
+      // apiKey: "AIzaSyA-5v9hrBZt8gYxKqet-Of90cCPNLHGAnk",
       // clientId:
-      //   "512677808993-fqbc14m6c6vu78dgggd2rtd1bfm1i003.apps.googleusercontent.com",
+      //   "385356524753-f4bficgqsm0sb1ggfma7trp6bimp1bo8.apps.googleusercontent.com",
+      // for test
+      apiKey: "AIzaSyAkOofkfB6SnWkc-9Cd_hDW1liY-pa74G8",
+      clientId:
+        "512677808993-fqbc14m6c6vu78dgggd2rtd1bfm1i003.apps.googleusercontent.com",
       discoveryDocs: [discoveryUrl],
       scope: SCOPE,
     })
@@ -85,12 +85,12 @@ function initClient() {
       //console.log(gettedToken[0].Zb.access_token);
 
       // link của thầy
-      var link_total_url =
-        "https://docs.google.com/spreadsheets/d/1sx2NMPFL7QLPeRMAJvysJj82c74ARS1qMrgSfwc3Xcg/edit#gid=0";
+      // var link_total_url =
+      //   "https://docs.google.com/spreadsheets/d/1sx2NMPFL7QLPeRMAJvysJj82c74ARS1qMrgSfwc3Xcg/edit#gid=0";
 
       // link test
-      // var link_total_url =
-      //   "https://docs.google.com/spreadsheets/d/1QPvX386QHPydkT86ADu6PQyXHe1rtuuypsPxgnDgMDM/edit#gid=0";
+      var link_total_url =
+        "https://docs.google.com/spreadsheets/d/1QPvX386QHPydkT86ADu6PQyXHe1rtuuypsPxgnDgMDM/edit#gid=0";
 
       link_total_url_api = getApi(link_total_url);
 
@@ -254,8 +254,17 @@ function callAPIOnInterval(
           );
           $("#percent").text(`${parseInt((count / tableRows.length) * 100)}%`);
         })
-        .fail(() => {
+        .fail((e) => {
           $(".popup").show();
+          // $(".popup p").html(`Có gì đó sai sai! <br/>
+          // Status Code: ${e.responseJSON.error.code} <br/>
+          // Error Message : ${e.responseJSON.error.message} <br/>
+          // Link: <a href="${allTrackingUrl[i]}" target="_blank">Click here</a>
+          // `);
+          $(".popup").append(`<h3><span style="color:red;font-size:30px;">${e.responseJSON.error.code} </span></h3>`)
+          $(".popup").append(`<p>${e.responseJSON.error.message}</p>`)
+          $(".popup").append(`<a href="${allTrackingUrl[i]}" target="_blank">Check this link</a>`)
+          $(".popup").append(`<p><em><b>Hiện tại ứng dụng hoạt động không chính xác!<b/></em></p>`)
         })
     );
   }
@@ -478,15 +487,16 @@ function renderAllClass(startPoint,tableRows) {
           }
     
           tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
           var totalSalaryPerClass =
-            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          hoursToPay * tableRows[i][6];
           tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
           var theTimeLeft =
             Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
           tableRows[i]["theTimeLeft"] = theTimeLeft;
-          var hoursToPay = Math.floor(
-            ((total_hour_learned - hoursPaid) * 1000) / 1000
-          );
+          
           tableRows[i]["hoursToPay"] = hoursToPay;
           tongluong += totalSalaryPerClass;
     
@@ -524,15 +534,16 @@ function renderAllClass(startPoint,tableRows) {
           }
     
           tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
           var totalSalaryPerClass =
-            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          hoursToPay * tableRows[i][6];
           tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
           var theTimeLeft =
             Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
           tableRows[i]["theTimeLeft"] = theTimeLeft;
-          var hoursToPay = Math.floor(
-            ((total_hour_learned - hoursPaid) * 1000) / 1000
-          );
+          
           tableRows[i]["hoursToPay"] = hoursToPay;
           tongluong += totalSalaryPerClass;
     
@@ -570,15 +581,15 @@ function renderAllClass(startPoint,tableRows) {
           }
     
           tableRows[i]["total_hour_learned"] = total_hour_learned;
+          var hoursToPay = Math.floor(
+            ((total_hour_learned - hoursPaid) * 1000) / 1000
+          );
           var totalSalaryPerClass =
-            Math.round(total_hour_learned - hoursPaid) * tableRows[i][6];
+          hoursToPay * tableRows[i][6];
           tableRows[i]["totalSalaryPerClass"] = totalSalaryPerClass;
           var theTimeLeft =
             Math.round((tableRows[i]["h4"] - total_hour_learned) * 1000) / 1000;
           tableRows[i]["theTimeLeft"] = theTimeLeft;
-          var hoursToPay = Math.floor(
-            ((total_hour_learned - hoursPaid) * 1000) / 1000
-          );
           tableRows[i]["hoursToPay"] = hoursToPay;
           tongluong += totalSalaryPerClass;
     
