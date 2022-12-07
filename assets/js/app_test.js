@@ -241,7 +241,7 @@ function callAPIOnInterval(
         tableRows[i]["h4"] = data.values[3][7];
         tableRows[i]["e4"] = data.values[3][4];
         tableRows[i]["last_teaching_day"] = dates[dates.length - 1];
-        // console.log(tableRows[i][0]);
+        // console.log(tableRows);
       })
         .done(() => {
           count++;
@@ -273,7 +273,9 @@ function callAPIOnInterval(
     if (allTrackingUrl.length === allTrackingUrl.length) {
       // setStatusLoading();
       var indexDone = 0;
+      sortTable(2);
       sortTable("theTimeLeft");
+      console.log(tableRows);
     }
   });
 }
@@ -287,9 +289,9 @@ function renderKidClass(startPoint,tableRows) {
         tableRows[i][4] = Number(tableRows[i][4]);
         hoursPaid = tableRows[i][4];
         var total_hour_learned = tableRows[i]["i4"];
-        if (typeof total_hour_learned != "undefined") {
-          total_hour_learned = total_hour_learned.replace(",", ".");
-        }
+        // if (typeof total_hour_learned != "undefined") {
+        //   total_hour_learned = total_hour_learned.replace(",", ".");
+        // }
   
         tableRows[i]["total_hour_learned"] = total_hour_learned;
         var totalSalaryPerClass =
@@ -425,9 +427,9 @@ function renderHvcgClass(startPoint,tableRows) {
         tableRows[i][4] = Number(tableRows[i][4]);
         hoursPaid = tableRows[i][4];
         var total_hour_learned = tableRows[i]["i4"];
-        if (typeof total_hour_learned != "undefined") {
-          total_hour_learned = total_hour_learned.replace(",", ".");
-        }
+        // if (typeof total_hour_learned != "undefined") {
+        //   total_hour_learned = total_hour_learned.replace(",", ".");
+        // }
   
         tableRows[i]["total_hour_learned"] = total_hour_learned;
         var totalSalaryPerClass =
@@ -482,11 +484,11 @@ function renderAllClass(startPoint,tableRows) {
           tableRows[i][4] = Number(tableRows[i][4]);
           hoursPaid = tableRows[i][4];
           var total_hour_learned = tableRows[i]["i4"];
+          // console.log(tableRows[i]);
           if (typeof total_hour_learned != "undefined") {
             total_hour_learned = total_hour_learned.replace(",", ".");
           }
-    
-          tableRows[i]["total_hour_learned"] = total_hour_learned;
+            tableRows[i]["total_hour_learned"] = total_hour_learned
           var hoursToPay = Math.floor(
             ((total_hour_learned - hoursPaid) * 1000) / 1000
           );
@@ -596,7 +598,6 @@ function renderAllClass(startPoint,tableRows) {
           allTableRows = allTableRows.concat(
             tableRows.filter((item) => allTableRows.indexOf(item) < 0)
           );
-    
           renderTableRow(tableRows[i], i);
           if (typeof total_hour_learned != "undefined") {
             document.getElementById("filter" + i).onclick = function () {
@@ -716,6 +717,9 @@ function renderTableRow(row, index) {
 }
 
 function sortTable(column = "i4") {
+  // allTableRows.forEach((e,i) => {
+  //   allTableRows[i]["i4"] = Number(allTableRows[i]["i4"])
+  // });
   allTableRows.sort(function (a, b) {
     a = a[column];
     b = b[column];
@@ -731,15 +735,15 @@ function sortTable(column = "i4") {
 }
 
 var ascSortOrder = true;
-$("#btn-sort-1").click(function () {
-  ascSortOrder = !ascSortOrder;
-  sortTable("i4");
-});
+// $("#btn-sort-1").click(function () {
+//   ascSortOrder = !ascSortOrder;
+//   sortTable("i4");
+// });
 
-$("#btn-sort-2").click(function () {
-  ascSortOrder = !ascSortOrder;
-  sortTable("h4");
-});
+// $("#btn-sort-2").click(function () {
+//   ascSortOrder = !ascSortOrder;
+//   sortTable("h4");
+// });
 
 $("#btn-sort-3").click(function () {
   ascSortOrder = !ascSortOrder;
@@ -755,14 +759,14 @@ $("#btn-sort-5").click(function () {
   ascSortOrder = !ascSortOrder;
   sortTable("hoursToPay");
 });
-$("#btn-sort-by-student").click(function () {
-  ascSortOrder = !ascSortOrder;
-  sortTable(2);
-});
-$("#btn-sort-by-mentor").click(function () {
-  ascSortOrder = !ascSortOrder;
-  sortTable(1);
-});
+// $("#btn-sort-by-student").click(function () {
+//   ascSortOrder = !ascSortOrder;
+//   sortTable(2);
+// });
+// $("#btn-sort-by-mentor").click(function () {
+//   ascSortOrder = !ascSortOrder;
+//   sortTable(1);
+// });
 $("#btn-sort-last-day").click(function () {
   ascSortOrder = !ascSortOrder;
   sortTable("last_teaching_day");
