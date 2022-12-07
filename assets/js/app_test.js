@@ -135,7 +135,6 @@ function initClient() {
       }
     });
 }
-
 // select class type
 // localStorage.setItem("classType", 0);
 // console.log(localStorage.getItem("classType"));
