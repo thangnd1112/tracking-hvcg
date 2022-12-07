@@ -142,7 +142,7 @@ function initClient() {
 $("#classType").on('change', function() {
   localStorage.setItem("classType", this.value);
   window.location.reload();
-  console.log(localStorage.getItem("classType"));
+  // console.log(localStorage.getItem("classType"));
   // if (classType == 1) {
   //   window.location.href = "/tracking-hvcg/test-kid.html";
   // } else if (classType == 2) {
@@ -274,7 +274,7 @@ function callAPIOnInterval(
       var indexDone = 0;
       sortTable(2);
       sortTable("theTimeLeft");
-      console.log(tableRows);
+      // console.log(tableRows);
     }
   });
 }
